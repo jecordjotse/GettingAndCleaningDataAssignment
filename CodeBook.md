@@ -168,4 +168,4 @@ To Get the table narrowed so that each row focuses on one measured
 variable type. Then means were calculated from grouped sets.
 
 Code for cleaning is found in *run\_analysis.R*. Tada\! Tidy Dataset for
-you analysis is saved in either *tidyData.txt* / *tidyData.csv*
+you analysis is saved in either *tidyData.txt* / *tidyData.csv* stored in the folder *Dataset*
