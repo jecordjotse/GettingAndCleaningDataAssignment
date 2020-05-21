@@ -1,7 +1,8 @@
 library(reshape2);library(plyr);library(dplyr);library(magrittr)
 ## Read Datasets
 features <- read.table("./Dataset/features.txt")
-act <- as.factor(read.table("./Dataset/activity_labels.txt"))
+act <- read.table("./Dataset/activity_labels.txt")
+act %<>% mutate_all(as.factor)
 tr_act_labels <- read.table("./Dataset/train/y_train.txt")
 tr_act_sets <- read.table("./Dataset/train/X_train.txt")
 ts_act_labels <- read.table("./Dataset/test/y_test.txt")
@@ -42,11 +43,11 @@ f[grep('^.*([Bb]ody).*$',f$description),'acceleration'] <- 'body'
 f[grep('^.*([Gg]ravi).*$',f$description),'acceleration'] <- 'gravity'
 f[grep('^.*([Jj]erk).*$',f$description),'jerk'] <- 'jerk'
 f[-grep('^.*([Jj]erk).*$',f$description),'jerk'] <- 'nojerk'
+f$variabletype <- c(1:nrow(f))
 f %<>% mutate_all(as.factor)
 
 ## Extracting mean of sets
 melt_new_set <- melt(new_set,id=names(new_set)[c(1:3)],measure.vars=names(new_set)[-c(1:3)])
-f$variabletype <- c(1:nrow(f))
 merge_melt_new_set <- merge(melt_new_set,f,by.x = "variable",by.y = "name")
 col_ord <-names(merge_melt_new_set)[c(2,3,13,5)]
 merge_melt_new_set_ordered <- merge_melt_new_set[col_ord]
