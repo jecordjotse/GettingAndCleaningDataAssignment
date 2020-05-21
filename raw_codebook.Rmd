@@ -1,0 +1,74 @@
+---
+title: "Getting And Cleaning Data"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('rough.R')
+```
+
+## Getting and Cleaning Data
+# Variables
+The variables and Columns are explained here.
+
+## subjects
+This is a factor vairable of 30 volunteers each labeled with numeric values from 1-30
+
+## activities
+This is a factor variable of 6 activities that were performed.
+```{r act, echo=FALSE}
+levels(act)
+```
+## variabletype
+
+This is a factor variable of ids for different feature measurements pertaining to this final tidy data.
+```{r f, echo=FALSE}
+knitr::kable(f)
+```
+
+## description
+This is a short description of the specific measured feature retrieved from features.txt data set
+
+## The following a broken down descriptions of the above said description variable
+### domain
+```{r echo=FALSE}
+levels(f$domain)
+```
+### acceleration
+```{r echo=FALSE}
+levels(f$acceleration)
+```
+### instrument
+```{r echo=FALSE}
+levels(f$instrument)
+```
+### jerk
+```{r echo=FALSE}
+levels(f$jerk)
+```
+### statistic
+```{r echo=FALSE}
+levels(f$statistic)
+```
+### axis
+```{r echo=FALSE}
+levels(f$axis)
+```
+
+## mean
+The mean value of the groups of values for each variable, each activity and each subject
+
+# Summary of Data
+The data collected was a dataset of various measured features from sensors on a Samsung SII by 30 volunteers performing 6 activities. The volunteers where broken into two sets; training and test.
+## What was done
+The two sets were merged with their respective activity label and subject label. Then expanded the table to transform each measured variable and its value from the columns to rows
+```{r}
+data.frame(name=c("Jane","John","Peter"),age=c(23,24,17),country=c("USA","GHA","ENG"))
+melt(data.frame(name=c("Jane","John","Peter"),age=c(23,24,17),country=c("USA","GHA","ENG")),id="name",measure.vars = c("age","country"))
+```
+To Get the table narrowed so that each row focuses on one measured variable type.
+Then means were calculated from grouped sets.
+
+Code for cleaning is found in *run_analysis.R*.
+Tada! Tidy Dataset for you analysis is saved in either *tidyData.txt* / *tidyData.csv*
